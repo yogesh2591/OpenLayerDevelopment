@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { openMap } from './Map';
 import * as ol from 'ol';
+import FileSaver from 'file-saver';
 
 let omap; 
 @Component({
@@ -29,6 +30,16 @@ export class AppComponent {
   }
   setBaseMap(layer_code) {
     this.openMap.setBaseMap(layer_code);
+  }
+  printMap(){
+    const format = 'a4';
+    
+    let map = this.openMap.getMap();
+    map.once('postcompose', function(event) {
+     var canvas = event.context.canvas;
+    canvas.toBlob(function(blob) {FileSaver.saveAs(blob, 'map.jpeg');});
+        });
+    map.renderSync();
   }
 }
 

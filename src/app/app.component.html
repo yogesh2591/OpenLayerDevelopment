@@ -2,21 +2,36 @@
   <div id="map"></div>
 </div>
 <div>
-  <a class='dropdown-button btn' href='#' data-activates='base_map_menu'>Base Map</a>
+ <a class='dropdown-button btn' href='#' data-activates='base_map_menu'>Base Map</a>
   <ul id='base_map_menu' class='dropdown-content'>
     <li><a (click)="setBaseMap(2)" >Satelite</a></li>
     <li><a (click)="setBaseMap(1)" >Hybrid</a></li>
     <li><a (click)="setBaseMap(0)">Open</a></li>
   </ul>
 </div>
-<div class="fixed-action-btn vertical  click-to-toggle">
-  <a class="btn-floating btn-large z-depth-3 teal">
-    <i class="material-icons">menu</i>
-  </a>
-  <ul>
-    <li><a  (click)="zoomIn()" class="btn-floating z-depth-3 teal darken-1"><i class="material-icons">zoom_in</i></a></li>
-    <li><a  (click)="zoomOut()" class="btn-floating z-depth-3 teal darken-1"><i class="material-icons">zoom_out</i></a></li>
-    <li><a  (click)="zoomtoGPS()" class="btn-floating z-depth-3 teal darken-1"><i class="material-icons">my_location</i></a></li>
+<div> 
+<div id="toolbar_menu" class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large z-depth-3 teal">
+      <i class="material-icons">straighten</i>     
+    </a>
+    <ul>
+         <li><a  (click)="clickbat()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Line"><i class="fa fa-arrows-h" ></i> </a></li> 
+        <li><a  (click)="clickbat()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Area"><i class="material-icons">format_shapes</i></a></li>
   </ul>
-
+  </div>
+  <div id="print_menu" class="fixed-action-btn horizontal">
+      <a (click)="printMap()" class="btn-floating btn-large z-depth-3 teal">
+          <i class="material-icons">print</i>     
+        </a>
+  </div>
+  <div id="map_menu" class="fixed-action-btn horizontal ">
+      <a class="btn-floating btn-large z-depth-3 teal">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li><a  (click)="zoomIn()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Zoom In"><i class="material-icons">zoom_in</i></a></li>
+            <li><a  (click)="zoomOut()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Zoom Out"><i class="material-icons">zoom_out</i></a></li>
+            <li><a  (click)="zoomtoGPS()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Location"><i class="material-icons">my_location</i></a></li>
+          </ul>
+  </div>
 </div>

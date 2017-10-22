@@ -117,4 +117,8 @@ export class openMap {
         });
    
     };
+
+    public getMap(){
+        return this.olmap;
+    };
 }

@@ -24,5 +24,17 @@
     height: auto;
     background-color: #009688;
 }
+#toolbar_menu {
+top:10px;
+}
+#print_menu {
+top:75px;
+}
+#map_menu {
+top:140px;
+}
+.fixed-action-btn {
+    right: 10px;
+}
 
  
