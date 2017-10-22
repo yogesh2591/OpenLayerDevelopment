@@ -1,0 +1,28 @@
+#map {
+    width: 100vw;
+    height: 100vh;
+  }
+  body{
+  margin :0 0 0 0 ;
+  }
+  .ol-attribution.ol-unselectable.ol-control
+  {
+  display : none;
+  }
+  .ol-zoom.ol-unselectable.ol-control
+  {
+  display : none;
+  }
+ .dropdown-button.btn{
+    position: fixed;
+    z-index: 10;
+    bottom: 50px;
+    left: 10px;
+    font-size: x-small;
+    padding: 5px 20px;
+    line-height: normal;
+    height: auto;
+    background-color: #009688;
+}
+
+ 
