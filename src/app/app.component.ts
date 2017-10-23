@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { openMap } from './Map';
 import FileSaver from 'file-saver';
 import { Measure} from './Measure';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
 
   openMap = new openMap();
   ngOnInit() {

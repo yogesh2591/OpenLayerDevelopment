@@ -1,5 +1,6 @@
 <div class="container-fluid">
   <div id="map"></div>
+
 </div>
 <div>
  <a class='dropdown-button btn' href='#' data-activates='base_map_menu'>Base Map</a>
@@ -15,7 +16,7 @@
       <i class="material-icons">straighten</i>     
     </a>
     <ul>
-         <li><a  (click)="clickbat()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Length"><i class="fa fa-arrows-h" ></i> </a></li> 
+         <li><a  (click)="clickbat()" data-activates="slide-out" class="button-collapse"class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Length"><i class="fa fa-arrows-h" ></i> </a></li> 
         <li><a  (click)="clickbat()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Area"><i class="material-icons">format_shapes</i></a></li>
   </ul>
   </div>
@@ -34,4 +35,5 @@
             <li><a  (click)="zoomtoGPS()" class="btn-floating z-depth-3 teal darken-1 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Location"><i class="material-icons">my_location</i></a></li>
           </ul>
   </div>
+  
 </div>

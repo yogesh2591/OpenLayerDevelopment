@@ -1,6 +1,8 @@
 import { openMap } from './Map';
 
 export class Measure{
-    constructor()
-{};
+    openMap = new openMap();
+    constructor(){ 
+      
+    };
 }
