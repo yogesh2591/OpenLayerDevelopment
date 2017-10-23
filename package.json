@@ -30,7 +30,6 @@
     "material-icons": "^0.1.0",
     "materialize-css": "^0.100.2",
     "ol": "^4.4.2",
-    "ol3-geocoder": "^2.5.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
