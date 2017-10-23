@@ -15,7 +15,7 @@ export class openMap {
     };
     olmap: any;
     
-
+    
     hybrid_map_layer = new Tile({
         source: new OSM({
             url: 'http://mt{0-3}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',

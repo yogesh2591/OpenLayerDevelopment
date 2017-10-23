@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { openMap } from './Map';
-import * as ol from 'ol';
 import FileSaver from 'file-saver';
 
 let omap; 
