@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { openMap } from './Map';
 import FileSaver from 'file-saver';
-
-let omap; 
+import { Measure} from './Measure';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
