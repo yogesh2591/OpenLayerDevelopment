@@ -40,5 +40,10 @@ export class AppComponent{
         });
     map.renderSync();
   }
+  zoom_to_layer()
+  {
+    this.openMap.zoom_to_layer();
+
+  }
 }
 

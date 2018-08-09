@@ -30,8 +30,11 @@ top:10px;
 #print_menu {
 top:75px;
 }
+#zoom_to_layer {
+    top:140px;
+    }
 #map_menu {
-top:140px;
+top:205px;
 }
 .fixed-action-btn {
     right: 10px;

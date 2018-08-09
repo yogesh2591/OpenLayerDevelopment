@@ -6,7 +6,9 @@ import Attribution from 'ol/attribution';
 import View from 'ol/view';
 import proj from 'ol/proj';
 import ScaleLine from 'ol/control/scaleline';
-import group from 'ol/layer/group';
+import LayerGroup from 'ol/layer/group';
+import TileWMS from 'ol/source/tilewms';
+import Extent from 'ol/extent';
 
 export class openMap {
 
@@ -36,9 +38,66 @@ export class openMap {
     });
     open_layer = new Tile({
         source: new OSM()
-    })
+    });
 
-    layers = [this.open_layer, this.hybrid_map_layer, this.standard_map_layer];
+    wms_layers  = new LayerGroup({
+		layers: [
+			new Tile({
+				source: new TileWMS({
+				  url: 'http://192.168.1.11:6600/geoserver/wms',
+				  params: {'LAYERS':'Farming:farm'},
+				  serverType: 'geoserver',
+				  isBaseLayer: false,
+				  crossOrigin: 'anonymous'
+                }),
+                opacity: 0.5
+           
+			  }),
+			  new Tile({
+				source: new TileWMS({
+				  url: 'http://192.168.1.11:6600/geoserver/wms',
+				  params: {'LAYERS':'Farming:plotdata'},
+				  serverType: 'geoserver',
+				  isBaseLayer: false,
+				  crossOrigin: 'anonymous'
+                }),
+                opacity: 0.5
+			  }),
+			  new Tile({
+				source: new TileWMS({
+				  url: 'http://192.168.1.11:6600/geoserver/wms',
+				  params: {'LAYERS':'Farming:waterpipeline'},
+				  serverType: 'geoserver',
+				  isBaseLayer: false,
+				  crossOrigin: 'anonymous'
+                }),
+                opacity: 0.5
+              }),
+              new Tile({
+				source: new TileWMS({
+				  url: 'http://192.168.1.11:6600/geoserver/wms',
+				  params: {'LAYERS':'Farming:irigationpoint'},
+				  serverType: 'geoserver',
+				  isBaseLayer: false,
+				  crossOrigin: 'anonymous'
+				})
+              }),
+              new Tile({
+				source: new TileWMS({
+				  url: 'http://192.168.1.11:6600/geoserver/wms',
+				  params: {'LAYERS':'Farming:waterpumpcontroller'},
+				  serverType: 'geoserver',
+				  isBaseLayer: false,
+				  crossOrigin: 'anonymous'
+                }),
+                opacity: 0.5
+			  })
+        ],
+       
+	})
+    
+
+    layers = [this.open_layer,this.hybrid_map_layer,this.standard_map_layer,this.wms_layers];
 
     public start() {
 
@@ -58,9 +117,11 @@ export class openMap {
                 zoom: 5,
                 minZoom: 4,
                 maxZoom: 25
+                
             })
         });
     };
+    
     public zoomIn() {
         let zoomLevel = this.olmap.getView().getZoom() + 1;
         let view = this.olmap.getView();
@@ -80,7 +141,6 @@ export class openMap {
     };
 
     public getCurrentZoom() {
-        console.log(this.olmap.getView().getZoom());
         return this.olmap.getView().getZoom();
     };
     public getMapExtent (){
@@ -105,7 +165,7 @@ export class openMap {
    
     public setBaseMap(base_layer_code) {
             this.olmap.getLayers().forEach(function (layer, i) {
-            if (layer instanceof group) {
+            if (layer instanceof LayerGroup) {
                 layer.setVisible(true);
             }
             else if (i == base_layer_code) {
@@ -117,6 +177,18 @@ export class openMap {
         });
    
     };
+
+    public zoom_to_layer()
+    {
+        // var extent;
+        var extent = Extent.createEmpty();
+        this.wms_layers.getLayers().forEach(function(layer) {
+            //extent.extend(extent, layer.getSource().getExtent());
+            console.log(layer.getSource());
+          });
+          this.olmap.getView().fitExtent(extent, this.olmap.getSize());
+
+    }
 
     public getMap(){
         return this.olmap;
