@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { openMap } from './Map';
 import FileSaver from 'file-saver';
 import { Measure} from './Measure';
-
+import {EventType} from 'ol/events/eventtype';
+import {Event} from 'ol/events/event'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -42,8 +43,12 @@ export class AppComponent{
   }
   zoom_to_layer()
   {
-    this.openMap.zoom_to_layer();
-
+    this.openMap.setVisibilityWMSLayer(1);
   }
+  getFeatureInfo(evt)
+  {
+ 
+  }
+
 }
 

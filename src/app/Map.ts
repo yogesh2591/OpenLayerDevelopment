@@ -8,7 +8,7 @@ import proj from 'ol/proj';
 import ScaleLine from 'ol/control/scaleline';
 import LayerGroup from 'ol/layer/group';
 import TileWMS from 'ol/source/tilewms';
-import Extent from 'ol/extent';
+import eventtype from 'ol/events/eventtype';
 
 export class openMap {
 
@@ -16,7 +16,7 @@ export class openMap {
 
     };
     olmap: any;
-    
+    clickEvent: any;
     
     hybrid_map_layer = new Tile({
         source: new OSM({
@@ -50,8 +50,8 @@ export class openMap {
 				  isBaseLayer: false,
 				  crossOrigin: 'anonymous'
                 }),
-                opacity: 0.5
-           
+                title: 'farm',
+                id: 1
 			  }),
 			  new Tile({
 				source: new TileWMS({
@@ -61,7 +61,8 @@ export class openMap {
 				  isBaseLayer: false,
 				  crossOrigin: 'anonymous'
                 }),
-                opacity: 0.5
+                title: 'plotdata',
+                id: 2
 			  }),
 			  new Tile({
 				source: new TileWMS({
@@ -71,7 +72,8 @@ export class openMap {
 				  isBaseLayer: false,
 				  crossOrigin: 'anonymous'
                 }),
-                opacity: 0.5
+                title: 'waterpipeline',
+                id: 3
               }),
               new Tile({
 				source: new TileWMS({
@@ -80,7 +82,9 @@ export class openMap {
 				  serverType: 'geoserver',
 				  isBaseLayer: false,
 				  crossOrigin: 'anonymous'
-				})
+                }),
+                title: 'irigationpoint',
+                id: 4
               }),
               new Tile({
 				source: new TileWMS({
@@ -88,15 +92,17 @@ export class openMap {
 				  params: {'LAYERS':'Farming:waterpumpcontroller'},
 				  serverType: 'geoserver',
 				  isBaseLayer: false,
-				  crossOrigin: 'anonymous'
+                  crossOrigin: 'anonymous'
                 }),
-                opacity: 0.5
-			  })
+                title: 'waterpumpcontroller',
+                id: 5
+              })
+           
         ],
        
 	})
     
-
+ 
     layers = [this.open_layer,this.hybrid_map_layer,this.standard_map_layer,this.wms_layers];
 
     public start() {
@@ -112,13 +118,14 @@ export class openMap {
             target: 'map',
             layers: this.layers,
             view: new View({
-                center: proj.transform(
-                    [72.821807, 18.974611], 'EPSG:4326', 'EPSG:3857'),
-                zoom: 5,
+                center: proj.transform( 
+                    [  73.155015, 19.246585], 'EPSG:4326', 'EPSG:3857'),
+                zoom: 16,
                 minZoom: 4,
-                maxZoom: 25
+                maxZoom: 18
                 
             })
+        
         });
     };
     
@@ -180,17 +187,37 @@ export class openMap {
 
     public zoom_to_layer()
     {
-        // var extent;
-        var extent = Extent.createEmpty();
-        this.wms_layers.getLayers().forEach(function(layer) {
-            //extent.extend(extent, layer.getSource().getExtent());
-            console.log(layer.getSource());
-          });
-          this.olmap.getView().fitExtent(extent, this.olmap.getSize());
-
     }
 
     public getMap(){
         return this.olmap;
     };
+
+    public getAllWMsLayers()
+    {
+        let allWmsLayers = [];
+        this.olmap.getLayers().forEach(function(layer,i){
+                if (layer instanceof LayerGroup) {
+                   layer.getLayers().forEach(function(childLayer){
+                    allWmsLayers.push(childLayer);
+                    //console.log(childLayer.getExtent());
+                   },this);
+                }            
+        },this);
+       // console.log(allWmsLayers);
+        return allWmsLayers;
+    }
+
+    public setVisibilityWMSLayer(layerId)
+    {
+        let allWMSLAyers = this.getAllWMsLayers();
+        allWMSLAyers.forEach(function(layer){
+            if(layer.get('id') === layerId){
+                layer.setVisible(layer.getVisible() ? false : true);
+            }
+           
+        });
+    }
+
+
 }
